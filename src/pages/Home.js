@@ -29,9 +29,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-  if (characters === [])  {
-    searchCharacters("");
-}
+    searchCharacters();
  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
