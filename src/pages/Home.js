@@ -11,30 +11,46 @@ const API_URL = "https://rickandmortyapi.com/api/character/?name="
 const Home = () => {
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isFirstLoad, setFirstLoad] = useState(true);
-  console.log(isFirstLoad)
+  const [isLoad, setLoad] = useState([]);
+ 
+
+
  
   useEffect(() => {
     const data = window.localStorage.getItem('Characters');
     if (data !== null) setCharaters(JSON.parse(data))
+   
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem('Characters', JSON.stringify(characters))
+   
   }, [characters]);
 
   const searchCharacters = async(title) => {
     const response = await fetch(`${API_URL}${title}`)
     const data = await response.json();
     setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
-    
+   
   };
 
-  if (isFirstLoad === true) {
+ function FirstLoad() {
+  if (isLoad === []) {
     searchCharacters("");
-    setFirstLoad(false);
-    console.log(isFirstLoad)
-  }
+    setLoad(1);}
+ }
+ 
+ FirstLoad();
+
+ useEffect(() => {
+  const data = window.localStorage.getItem('Isload');
+  if (data !== null) setLoad(JSON.parse(data))
+}, []);
+
+useEffect(() => {
+  window.localStorage.setItem('Isload', JSON.stringify(isLoad))
+}, [isLoad]);
+
 
   // Search on pressed Enter key
   function handleKeyDown(e) {
