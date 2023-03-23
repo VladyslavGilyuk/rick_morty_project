@@ -29,7 +29,7 @@ const Home = () => {
     setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)))
   };
 
-  if (characters === [])  {
+  if (characters === false)  {
     searchCharacters("");
 }
 
