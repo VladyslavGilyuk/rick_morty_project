@@ -14,7 +14,6 @@ const Home = () => {
 
  
   useEffect(() => {
- 
     const data = window.localStorage.getItem('Characters');
     if (data !== null) setCharaters(JSON.parse(data))
   }, []);
@@ -29,9 +28,12 @@ const Home = () => {
     setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)))
   };
 
-  if (characters === false)  {
+  useEffect(() => {
+  if (characters === [])  {
     searchCharacters("");
 }
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   // Search on pressed Enter key
   function handleKeyDown(e) {
