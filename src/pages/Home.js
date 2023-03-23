@@ -11,7 +11,8 @@ const API_URL = "https://rickandmortyapi.com/api/character/?name="
 const Home = () => {
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [isFirstLoad, setFirstLoad] = useState(true);
+  console.log(isFirstLoad)
  
   useEffect(() => {
     const data = window.localStorage.getItem('Characters');
@@ -25,18 +26,21 @@ const Home = () => {
   const searchCharacters = async(title) => {
     const response = await fetch(`${API_URL}${title}`)
     const data = await response.json();
-    setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)))
+    setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
+    
   };
 
-  useEffect(() => {
-    searchCharacters();
- // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+  if (isFirstLoad === true) {
+    searchCharacters("");
+    setFirstLoad(false);
+    console.log(isFirstLoad)
+  }
 
   // Search on pressed Enter key
   function handleKeyDown(e) {
     if(e.keyCode === 13) { 
       searchCharacters(searchTerm)
+      
     }
   }
 
