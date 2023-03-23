@@ -9,15 +9,16 @@ const CharacterInfo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getData()
-    window.scrollTo(0,0) /*?*/
+    const getData = async() => {
+    const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
+    const data = await response.json();
+    setCurrentCharacter(data)
+  }
+    getData();
+ // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getData = () => {
-    fetch(`https://rickandmortyapi.com/api/character/${id}`)
-    .then(res => res.json())
-    .then(data => setCurrentCharacter(data))
-  }
+ 
 
   return (
     <>
