@@ -12,7 +12,9 @@ const Home = () => {
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+ 
   useEffect(() => {
+ 
     const data = window.localStorage.getItem('Characters');
     if (data !== null) setCharaters(JSON.parse(data))
   }, []);
@@ -26,6 +28,10 @@ const Home = () => {
     const data = await response.json();
     setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)))
   };
+
+  if (characters === [])  {
+    searchCharacters("");
+}
 
   // Search on pressed Enter key
   function handleKeyDown(e) {
