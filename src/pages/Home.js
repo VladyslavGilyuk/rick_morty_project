@@ -12,7 +12,7 @@ const Home = () => {
 
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoad, setLoad] = useState(0);
+  /*const [isLoad, setLoad] = useState(0);*/
  
 
 
