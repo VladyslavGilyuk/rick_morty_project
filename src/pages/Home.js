@@ -34,16 +34,13 @@ const Home = () => {
    
   };
 
-
- useEffect(() => {
-  function FirstLoad() {
-    if (isLoad === []) {
-      searchCharacters("");
-      setLoad(1);}
-   }
-  FirstLoad();
-}, [isLoad]);
-
+ function FirstLoad() {
+  if (isLoad === []) {
+    searchCharacters("");
+    setLoad(1);}
+ }
+ 
+ FirstLoad();
 
  useEffect(() => {
   const data = window.localStorage.getItem('Isload');
