@@ -31,22 +31,26 @@ const Home = () => {
    
   }, [characters]);
 
+
+ useEffect(() => {
+   
+
+ function FirstLoad() {
+  if (isLoad === []) {
+    console.log("Nihao")
+    searchCharacters("");
+    setLoad(1);}
+ };
+
+  FirstLoad();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [characters]);
  
 
 
-
-
  useEffect(() => {
-  function FirstLoad() {
-    if (isLoad === []) {
-      setCharaters(searchCharacters(""));
-      setLoad("1");}
-    else {
-    const data = window.localStorage.getItem('Isload');
-    if (data !== null) setLoad(JSON.parse(data))
-   }}
-  FirstLoad();
-   // eslint-disable-next-line react-hooks/exhaustive-deps
+  const data = window.localStorage.getItem('Isload');
+  if (data !== null) setLoad(JSON.parse(data))
 }, []);
 
 useEffect(() => {
