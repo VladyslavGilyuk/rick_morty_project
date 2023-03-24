@@ -40,11 +40,12 @@ const Home = () => {
   function FirstLoad() {
     if (isLoad === []) {
       searchCharacters("");
-      setLoad(1);}
-   }
+      setLoad("1");}
+    else {
+    const data = window.localStorage.getItem('Isload');
+    if (data !== null) setLoad(JSON.parse(data))
+   }}
   FirstLoad();
-  const data = window.localStorage.getItem('Isload');
-  if (data !== null) setLoad(JSON.parse(data))
    // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
