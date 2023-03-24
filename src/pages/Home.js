@@ -10,21 +10,15 @@ const API_URL = "https://rickandmortyapi.com/api/character/?name="
 
 const Home = () => {
   
-const searchCharacters = async(title) => {
-  const response = await fetch(`${API_URL}${title}`)
-  const data = await response.json();
-  setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
-};
-
-  const firstCharacters = async(title) => {
+  const defaultSearch = async(title) => {
     const response = await fetch(`${API_URL}${title}`)
     const data = await response.json();
-    setLoad(data.results.sort((a, b) => a.name.localeCompare(b.name)));
+    setFirstLoad(data.results.sort((a, b) => a.name.localeCompare(b.name)));
   };
 
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isload, setLoad] = useState([firstCharacters("")]);
+  const [firstLoad, setFirstLoad] = useState([defaultSearch("")]);
  
   useEffect(() => {
       const data = window.localStorage.getItem('Characters');
@@ -37,21 +31,25 @@ const searchCharacters = async(title) => {
   }, [characters]);
 
 
-
+/*
   useEffect(() => {
     const data = window.localStorage.getItem('Isload');
     if (data !== null) setLoad(JSON.parse(data))
   // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
-
+}, []);*/
+/*
 useEffect(() => {
   window.localStorage.setItem('Isload', JSON.stringify(isload))
  
-}, [isload]);
+}, [isload]);*/
 
 
 
-
+const searchCharacters = async(title) => {
+  const response = await fetch(`${API_URL}${title}`)
+  const data = await response.json();
+  setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
+};
 
 
 
@@ -101,7 +99,7 @@ useEffect(() => {
         </div>
         ) : (
           <div className="container">
-          {isload.map((load) => (
+          {firstLoad.map((load) => (
             <Link to={`/character/${load.id}`}>
               <CharacterCard key={load.id} className="element" character ={load} />
             </Link>))
