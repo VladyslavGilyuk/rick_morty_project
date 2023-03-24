@@ -41,8 +41,9 @@ const searchCharacters = async(title) => {
 };
 
 useEffect(() => {
-  if (characters === [])
-  searchCharacters("");
+  if (characters === []) {
+    searchCharacters("");
+  }
       // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
