@@ -9,6 +9,11 @@ import GoogleLogin from "../components/GoogleLogin";
 const API_URL = "https://rickandmortyapi.com/api/character/?name="
 
 const Home = () => {
+  const searchCharactersFirst = async(title) => {
+    const response = await fetch(`${API_URL}${title}`)
+    const data = await response.json();
+    return data.results.sort((a, b) => a.name.localeCompare(b.name));
+  }
 
   const searchCharacters = async(title) => {
     const response = await fetch(`${API_URL}${title}`)
@@ -16,7 +21,7 @@ const Home = () => {
     setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
    
   };
-  const [characters, setCharaters] = useState(searchCharacters());
+  const [characters, setCharaters] = useState(searchCharactersFirst(""));
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoad, setLoad] = useState([]);
  
