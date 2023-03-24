@@ -9,21 +9,11 @@ import GoogleLogin from "../components/GoogleLogin";
 const API_URL = "https://rickandmortyapi.com/api/character/?name="
 
 const Home = () => {
-  
-  const searchCharactersFirst = async(title) => {
-    const response = await fetch(`${API_URL}${title}`)
-    const data = await response.json();
-    data.results.sort((a, b) => a.name.localeCompare(b.name));
-    
-  }
 
-  const searchCharacters = async(title) => {
-    const response = await fetch(`${API_URL}${title}`)
-    const data = await response.json();
-    setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
-   
-  };
-  const [characters, setCharaters] = useState(searchCharactersFirst(""));
+
+
+
+  const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoad, setLoad] = useState([]);
  
@@ -42,26 +32,32 @@ const Home = () => {
   }, [characters]);
 
  
-/*
- function FirstLoad() {
-  if (isLoad === []) {
-    searchCharacters("");
-    setLoad(1);}
- }
- 
- FirstLoad();
- */
+
+
+
 
  useEffect(() => {
+  function FirstLoad() {
+    if (isLoad === []) {
+      searchCharacters("");
+      setLoad(1);}
+   }
+  FirstLoad();
   const data = window.localStorage.getItem('Isload');
   if (data !== null) setLoad(JSON.parse(data))
+   // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
 useEffect(() => {
   window.localStorage.setItem('Isload', JSON.stringify(isLoad))
 }, [isLoad]);
 
-
+const searchCharacters = async(title) => {
+  const response = await fetch(`${API_URL}${title}`)
+  const data = await response.json();
+  setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
+ 
+};
   // Search on pressed Enter key
   function handleKeyDown(e) {
     if(e.keyCode === 13) { 
