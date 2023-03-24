@@ -12,10 +12,10 @@ const Home = () => {
 
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  /*const [isLoad, setLoad] = useState(0);*/
+  const [isload, setLoad] = useState(true);
  
 
-    
+
  
   useEffect(() => {
       const data = window.localStorage.getItem('Characters');
@@ -29,7 +29,16 @@ const Home = () => {
 
 
 
+  useEffect(() => {
+    const data = window.localStorage.getItem('Isload');
+    if (data !== null) setLoad(JSON.parse(data))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
+useEffect(() => {
+  window.localStorage.setItem('Isload', JSON.stringify(isload))
+ 
+}, [isload]);
 
 
 
@@ -37,14 +46,16 @@ const searchCharacters = async(title) => {
   const response = await fetch(`${API_URL}${title}`)
   const data = await response.json();
   setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
- 
+  
 };
 
-
-
-if (characters === []) {
+useEffect(() => {
+  if (isload === true && characters === []) {
   searchCharacters("");
-}
+  }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
 
   // Search on pressed Enter key
   function handleKeyDown(e) {
