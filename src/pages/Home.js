@@ -19,13 +19,12 @@ const searchCharacters = async(title) => {
   const firstCharacters = async(title) => {
     const response = await fetch(`${API_URL}${title}`)
     const data = await response.json();
-    let result = data.results;
-    return  result;
+    setLoad(data.results.sort((a, b) => a.name.localeCompare(b.name)));
   };
 
-  const [characters, setCharaters] = useState([firstCharacters("")]);
+  const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isload, setLoad] = useState(true);
+  const [isload, setLoad] = useState([firstCharacters("")]);
  
   useEffect(() => {
       const data = window.localStorage.getItem('Characters');
@@ -101,9 +100,13 @@ useEffect(() => {
           }
         </div>
         ) : (
-          <div className="empty">
-            <h3>No characters were found, please try again</h3>
-           </div>
+          <div className="container">
+          {isload.map((load) => (
+            <Link to={`/character/${load.id}`}>
+              <CharacterCard key={load.id} className="element" character ={load} />
+            </Link>))
+          }
+        </div>
             )
       }      
     </div>
