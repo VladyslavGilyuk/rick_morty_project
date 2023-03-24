@@ -15,7 +15,7 @@ const Home = () => {
     return (data.results.sort((a, b) => a.name.localeCompare(b.name)));
   };
 
-  const [characters, setCharaters] = useState([firstCharacters()]);
+  const [characters, setCharaters] = useState(firstCharacters());
   const [searchTerm, setSearchTerm] = useState("");
   const [isload, setLoad] = useState(true);
  
