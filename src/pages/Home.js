@@ -16,48 +16,29 @@ const Home = () => {
     setFirstLoad(data.results.sort((a, b) => a.name.localeCompare(b.name)));
   };
 
+  const [firstLoad, setFirstLoad] = useState([defaultSearch("")]);
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [firstLoad, setFirstLoad] = useState([defaultSearch("")]);
- 
+
+  const searchCharacters = async(title) => {
+    const response = await fetch(`${API_URL}${title}`)
+    const data = await response.json();
+    setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
+  };
+
   useEffect(() => {
-      const data = window.localStorage.getItem('Characters');
-      if (data !== null) setCharaters(JSON.parse(data))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const data = window.localStorage.getItem('Characters');
+    if (data !== null) setCharaters(JSON.parse(data))
   }, []);
+
   useEffect(() => {
     window.localStorage.setItem('Characters', JSON.stringify(characters))
-   
   }, [characters]);
-
-
-/*
-  useEffect(() => {
-    const data = window.localStorage.getItem('Isload');
-    if (data !== null) setLoad(JSON.parse(data))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);*/
-/*
-useEffect(() => {
-  window.localStorage.setItem('Isload', JSON.stringify(isload))
- 
-}, [isload]);*/
-
-
-
-const searchCharacters = async(title) => {
-  const response = await fetch(`${API_URL}${title}`)
-  const data = await response.json();
-  setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
-};
-
-
-
+  
   // Search on pressed Enter key
   function handleKeyDown(e) {
     if(e.keyCode === 13) { 
       searchCharacters(searchTerm)
-      
     }
   }
 

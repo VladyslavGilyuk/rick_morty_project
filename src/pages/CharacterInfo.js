@@ -10,12 +10,12 @@ const CharacterInfo = () => {
 
   useEffect(() => {
     const getData = async() => {
-    const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
-    const data = await response.json();
-    setCurrentCharacter(data)
-  }
+      const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      const data = await response.json();
+      setCurrentCharacter(data)
+    }
     getData();
- // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
  
