@@ -39,8 +39,10 @@ const Home = () => {
     searchCharacters("");
     setLoad(1);}
  }
- 
- FirstLoad();
+ useEffect(() => {
+  FirstLoad();
+}, [isLoad]);
+
 
  useEffect(() => {
   const data = window.localStorage.getItem('Isload');
