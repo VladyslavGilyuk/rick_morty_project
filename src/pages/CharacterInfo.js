@@ -18,8 +18,6 @@ const CharacterInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
- 
-
   return (
     <>
       <div className="go-back" onClick={() => navigate(-1)}>
