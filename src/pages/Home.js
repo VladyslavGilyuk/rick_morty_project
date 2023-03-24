@@ -19,7 +19,8 @@ const searchCharacters = async(title) => {
   const firstCharacters = async(title) => {
     const response = await fetch(`${API_URL}${title}`)
     const data = await response.json();
-    return data.results.sort((a, b) => a.name.localeCompare(b.name));
+    let result = data.results;
+    return  result;
   };
 
   const [characters, setCharaters] = useState([firstCharacters("")]);
