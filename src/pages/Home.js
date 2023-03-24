@@ -43,7 +43,7 @@ const searchCharacters = async(title) => {
 useEffect(() => {
   if (characters === [])
   searchCharacters("");
-}, [characters]);
+}, []);
 
 
   // Search on pressed Enter key
