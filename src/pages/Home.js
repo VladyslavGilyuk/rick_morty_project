@@ -50,11 +50,11 @@ const searchCharacters = async(title) => {
 };
 
 useEffect(() => {
-  if (isload === true && characters.length < 0) {
+  if (isload === true && characters === []) {
   searchCharacters("");
   }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+}, [isload]);
 
 
   // Search on pressed Enter key
