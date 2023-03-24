@@ -15,7 +15,7 @@ const Home = () => {
   /*const [isLoad, setLoad] = useState(0);*/
  
 
-
+    
  
   useEffect(() => {
       const data = window.localStorage.getItem('Characters');
@@ -40,13 +40,11 @@ const searchCharacters = async(title) => {
  
 };
 
-useEffect(() => {
-  if (characters === []) {
-    searchCharacters("");
-  }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
 
+
+if (characters === []) {
+  searchCharacters("");
+}
 
   // Search on pressed Enter key
   function handleKeyDown(e) {
