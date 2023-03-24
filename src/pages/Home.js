@@ -21,9 +21,15 @@ const Home = () => {
 
  
   useEffect(() => {
-    const data = window.localStorage.getItem('Characters');
-    if (data !== null) setCharaters(JSON.parse(data))
-   
+    if (characters === []) {
+      searchCharacters("")
+    } else {
+      const data = window.localStorage.getItem('Characters');
+      if (data !== null) setCharaters(JSON.parse(data))
+    }
+    
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -32,23 +38,12 @@ const Home = () => {
   }, [characters]);
 
 
- useEffect(() => {
-   
 
- function FirstLoad() {
-  if (isLoad === []) {
-    console.log("Nihao")
-    searchCharacters("");
-    setLoad(1);}
- };
-
-  FirstLoad();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [characters]);
  
 
 
  useEffect(() => {
+
   const data = window.localStorage.getItem('Isload');
   if (data !== null) setLoad(JSON.parse(data))
 }, []);
@@ -56,6 +51,7 @@ const Home = () => {
 useEffect(() => {
   window.localStorage.setItem('Isload', JSON.stringify(isLoad))
 }, [isLoad]);
+
 
 const searchCharacters = async(title) => {
   const response = await fetch(`${API_URL}${title}`)
