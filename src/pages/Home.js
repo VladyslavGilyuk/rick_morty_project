@@ -15,14 +15,14 @@ const searchCharacters = async(title) => {
   const data = await response.json();
   setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
 };
-/*
+
   const firstCharacters = async(title) => {
     const response = await fetch(`${API_URL}${title}`)
     const data = await response.json();
     return data.results.sort((a, b) => a.name.localeCompare(b.name));
-  };*/
+  };
 
-  const [characters, setCharaters] = useState([searchCharacters("")]);
+  const [characters, setCharaters] = useState([firstCharacters("")]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isload, setLoad] = useState(true);
  
