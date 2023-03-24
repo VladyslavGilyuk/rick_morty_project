@@ -53,7 +53,7 @@ useEffect(() => {
   if (characters?.length > 0 ) {
     searchCharacters("");
   }
- 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
 
