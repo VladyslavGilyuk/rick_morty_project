@@ -39,10 +39,11 @@ const searchCharacters = async(title) => {
   setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
  
 };
+
 useEffect(() => {
   if (characters === [])
   searchCharacters("");
-}, []);
+}, [characters]);
 
 
   // Search on pressed Enter key
