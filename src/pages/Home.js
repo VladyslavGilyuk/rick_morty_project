@@ -10,28 +10,18 @@ const API_URL = "https://rickandmortyapi.com/api/character/?name="
 
 const Home = () => {
 
-
-
-
   const [characters, setCharaters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoad, setLoad] = useState([]);
+  const [isLoad, setLoad] = useState(0);
  
 
 
  
   useEffect(() => {
-    if (characters === []) {
-      searchCharacters("")
-    } else {
       const data = window.localStorage.getItem('Characters');
       if (data !== null) setCharaters(JSON.parse(data))
-    }
-    
-    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(() => {
     window.localStorage.setItem('Characters', JSON.stringify(characters))
    
@@ -39,18 +29,8 @@ const Home = () => {
 
 
 
- 
 
 
- useEffect(() => {
-
-  const data = window.localStorage.getItem('Isload');
-  if (data !== null) setLoad(JSON.parse(data))
-}, []);
-
-useEffect(() => {
-  window.localStorage.setItem('Isload', JSON.stringify(isLoad))
-}, [isLoad]);
 
 
 const searchCharacters = async(title) => {
@@ -59,6 +39,12 @@ const searchCharacters = async(title) => {
   setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
  
 };
+useEffect(() => {
+  if (characters === [])
+  searchCharacters("");
+}, []);
+
+
   // Search on pressed Enter key
   function handleKeyDown(e) {
     if(e.keyCode === 13) { 
