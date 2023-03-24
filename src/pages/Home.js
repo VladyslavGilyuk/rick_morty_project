@@ -34,12 +34,13 @@ const Home = () => {
    
   };
 
- function FirstLoad() {
-  if (isLoad === []) {
-    searchCharacters("");
-    setLoad(1);}
- }
+
  useEffect(() => {
+  function FirstLoad() {
+    if (isLoad === []) {
+      searchCharacters("");
+      setLoad(1);}
+   }
   FirstLoad();
 }, [isLoad]);
 
