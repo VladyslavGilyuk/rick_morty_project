@@ -9,13 +9,15 @@ import GoogleLogin from "../components/GoogleLogin";
 const API_URL = "https://rickandmortyapi.com/api/character/?name="
 
 const Home = () => {
+  const firstCharacters = async(title) => {
+    const response = await fetch(`${API_URL}${title}`)
+    const data = await response.json();
+    setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
+  };
 
-  const [characters, setCharaters] = useState([]);
+  const [characters, setCharaters] = useState([firstCharacters()]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isload, setLoad] = useState(true);
- 
-
-
  
   useEffect(() => {
       const data = window.localStorage.getItem('Characters');
@@ -46,15 +48,10 @@ const searchCharacters = async(title) => {
   const response = await fetch(`${API_URL}${title}`)
   const data = await response.json();
   setCharaters(data.results.sort((a, b) => a.name.localeCompare(b.name)));
-  
 };
 
-useEffect(() => {
-  if (characters?.length > 0 ) {
-    searchCharacters("");
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+
+
 
 
   // Search on pressed Enter key
